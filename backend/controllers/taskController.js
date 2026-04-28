@@ -54,10 +54,6 @@ export const updateTask = async (req, res) => {
       return res.status(404).json({ message: 'Task not found' });
     }
 
-    if (task.assignedTo.toString() !== req.user.id && req.user.role !== 'admin') {
-      return res.status(403).json({ message: 'Not authorized to update this task' });
-    }
-
     task.status = status || task.status;
     const updatedTask = await task.save();
 
